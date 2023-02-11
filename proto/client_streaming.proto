@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pb;
+option go_package = "./pb;pb";
+
+message UploadRequest {
+  string filename = 1;
+  bytes data = 2;
+}
+
+message UploadResponse { repeated FileInfo files = 1; }
+
+message FileInfo {
+  string filename = 1;
+}
+
+service UploadService {
+  rpc Upload(stream UploadRequest) returns (UploadResponse);
+}

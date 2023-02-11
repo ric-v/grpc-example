@@ -1,0 +1,32 @@
+syntax = "proto3";
+package pb;
+option go_package = "./pb;pb";
+
+message SimpleRequest {
+  string name = 1;
+  repeated string tags = 2;
+  string msg = 3;
+  oneof id_or_ssid {
+    int32 id = 4;
+    string ssid = 5;
+  }
+  optional string description = 6;
+  double height = 7;
+  float weight = 8;
+  int32 age = 9;
+  int64 timestamp = 10;
+  bool is_ok = 11;
+  bytes data = 12;
+}
+
+message SimpleResponse {
+  bool ack = 1;
+  string msg = 2;
+  int32 code = 3;
+}
+
+service SimpleService {
+  rpc Hello(SimpleRequest) returns (SimpleResponse) {}
+  rpc Echo(SimpleRequest) returns (SimpleRequest) {}
+  rpc Info(SimpleRequest) returns (SimpleResponse) {}
+}
